@@ -1,0 +1,12 @@
+h1 {
+  color: navy;
+  line-height: 50px;
+  border-bottom: 5px solid navy;
+}
+body {
+  background-color: grey;
+}
+.banner image {
+  width: 100%;
+  height: auto;
+}
