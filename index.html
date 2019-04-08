@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Psychic Game</title>
-    <script src="./assets/Javascript/game.js"></script>
+    <!-- jQuery Link -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,33 +21,63 @@
   </head>
 
   <body>
-      <div class="container">
-        <h1>The Psychic Game</h1>
+    <div class="jumbotron bg-dark text-white">
+      <div class="media">
+          <img
+          class="mr-3"
+          src="assets/Images/download.jpeg"
+          width="300 height="
+          200
+          alt="psychic"
+        />
+        <!-- The title of the game -->
+        <div class="media-body">
+          <h1 class="display-4">The Psychic Game</h1>
+          <p class="lead">Let's put your psychic abilities to test.</p>
+          <p class="lead">Guess what letter I'm thinking of.</p>
+          <p class="lead">Press a letter from A - Z to start!</p>
+      </div>
       </div>
     </div>
-    <div class="text-center">
-      <img src="./assets/Images/download.jpeg" alt="Psychic" />
-    </div>
-    <br />
-    <div id="game" class="text-center">
-      <h3>Guess what letter I'm thinking of A-Z</h3>
-      <br>
-      <h4>Wins: 0</h4>
-      <br />
-      <h4>Losses: 0</h4>
-      <br />
-      <h4>Guesses left: 9</h4>
-      <br />
-      <h4>Your guesses so far:</h4>
-    </div>
-    <br />
-    <footer>
-      <div class="footer text-center">
-        Anadelaine Catalla &copy; 2019
+    <div class="container">
+      <div class="col-md-12">
+        <!-- empty div for counter -->
+        <ul class="list-group">
+          <li class="list-group-item bg-dark text-white">
+            <!-- The wins counter, starts with 0  -->
+            <p>Wins: <span id="wins">0</span></p>
+          </li>
+          <li class="list-group-item bg-dark text-white">
+            <!-- The loss counter, starts with 0 -->
+            <p>Losses: <span id="losses">0</span></p>
+          </li>
+          <br />
+          <!-- The amount of guesses the player has -->
+          <li class="list-group-item bg-dark text-white">
+            <p>Guesses Left: <span id="guesses-left">9</span></p>
+          </li>
+          <!-- This is what the player guessed, starts empty -->
+          <li class="list-group-item bg-dark text-white">
+            <p>Your Guesses so far: <span id="guesses-so-far"></span></p>
+          </li>
+        </ul>
       </div>
-    </footer>
+    </div>
+    <br />
+ 
+    
+      <div class="static-bottom">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card bg-dark text-white">
+              <div class="card-body text-center">
+            Copyright &copy; 2019 Anadelaine Catalla
+              </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   <script src="assets/Javascript/game.js"></script>
   </body>
 </html>
-
-
-

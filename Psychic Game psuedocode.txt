@@ -1,0 +1,6 @@
+Variables: 
+    Wins = 0
+    Losses = 0
+    Guesses Left = 9
+    Your Guesses so Far = ""
+    Computer's Choice = ""

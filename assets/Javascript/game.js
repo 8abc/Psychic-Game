@@ -1,11 +1,8 @@
-var computerChoices = [
+var letters = [
   "a",
   "b",
   "c",
   "d",
-  "e",
-  "f",
-  "g",
   "h",
   "i",
   "j",
@@ -27,60 +24,77 @@ var computerChoices = [
   "z"
 ];
 
+// This counts for wins & losses
 var wins = 0;
 var losses = 0;
+// This is how many guesses the player has left
 var guessesLeft = 9;
-var lettersGuessed = [];
-var computerGuess = [];
+// This is the letter the player needs to guess
+var letterToGuess = null;
+// Holds what we guess
+var guessedLetters = [];
 
-window.onload = function() {
-  var compGuess =
-    computerChoices[Math.floor(Math.random() * computerChoices.length)];
-  computerGuess.push(compGuess);
-  console.log(computerGuess[0]);
+var updateLetterToGuess = function() {
+  // Get a random letterToGuess and assign it based on a random generator
+  letterToGuess = letters[Math.floor(Math.random() * letters.length)];
+};
+var updateGuessesLeft = function() {
+  // Grab the HTML element and add guessesLeft.
+  $("#guesses-left").html(guessesLeft);
 };
 
-document.onkeyup = function(event) {
-  var playerGuess = event.key;
-  lettersGuessed.push(playerGuess);
-  console.log(computerGuess[0]);
+var updateGuessesSoFar = function() {
+  // Take what the player guesses, then display it as letters separated by commas.
+  $("#guesses-so-far").html(guessedLetters.join(", "));
+};
 
-  if (playerGuess === computerGuess[0] && guessesLeft > 0) {
+//Reset game
+var reset = function() {
+  guessesLeft = 9;
+  guessedLetters = [];
+  updateLetterToGuess();
+  updateGuessesLeft();
+  updateGuessesSoFar();
+};
+
+// Execute on page load.
+updateLetterToGuess();
+updateGuessesLeft();
+
+// Capture the keyboard clicks.
+document.onkeydown = function(event) {
+  // It's going to reduce the guesses by one
+  guessesLeft--;
+
+  // Lowercase the letter
+  var letter = event.key.toLowerCase();
+
+  // Then add the guess to the guessedLetters
+  guessedLetters.push(letter);
+
+  // Then its going to run the update functions
+  updateGuessesLeft();
+  updateGuessesSoFar();
+
+  // Check if there's a match.
+  if (letter === letterToGuess) {
+    alert("You have some psychic abilities, tell me the what's in the future.");
+    // If there is then we win and we'll update the HTML to display the win.
     wins++;
-    guessesLeft = 9;
-    lettersGuessed.length = 0;
-    computerGuess.length = 0;
-    var compGuess =
-      computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    computerGuess.push(compGuess);
-    console.log(computerGuess[0]);
-  } else if (playerGuess !== computerGuess[0] && guessesLeft > 0) {
-    guessesLeft = guessesLeft - 1;
-  } else {
-    losses++;
-    guessesLeft = 9;
-    lettersGuessed.length = 0;
-    computerGuess.length = 0;
-    var compGuess =
-      computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    computerGuess.push(compGuess);
-    console.log(computerGuess[0]);
+    document.querySelector("#wins").innerHTML = wins;
+
+    // Then reset the game
+    reset();
   }
 
-  var html =
-    "<p>Guess what letter I'm thinking of!</p>" +
-    "<p>Wins: " +
-    wins +
-    "</p>" +
-    "<p>Losses: " +
-    losses +
-    "</p>" +
-    "<p>Guesses left: " +
-    guessesLeft +
-    "</p>" +
-    "<p>Your guesses so far: " +
-    lettersGuessed +
-    "</p>";
+  // If we are out of guesses...
+  if (guessesLeft === 0) {
+    // Then we will loss and we'll update the HTML to display the loss.
+    losses++;
+    alert("Aw, you're not psychic right now. Want to try again?");
+    document.querySelector("#losses").innerHTML = losses;
 
-  document.querySelector("#game").innerHTML = html;
+    // Then reset the game.
+    reset();
+  }
 };
