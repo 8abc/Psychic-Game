@@ -32,7 +32,7 @@ var guessesLeft = 9;
 // This is the letter the player needs to guess
 var letterToGuess = null;
 // Holds what we guess
-var guessedLetters = [];
+var userAnswers = [];
 
 var updateLetterToGuess = function() {
   // Get a random letterToGuess and assign it based on a random generator
@@ -45,13 +45,13 @@ var updateGuessesLeft = function() {
 
 var updateGuessesSoFar = function() {
   // Take what the player guesses, then display it as letters separated by commas.
-  $("#guesses-so-far").html(guessedLetters.join(", "));
+  $("#userAnswers").html(userAnswers.join(", "));
 };
 
 //Reset game
 var reset = function() {
   guessesLeft = 9;
-  guessedLetters = [];
+  userAnswers = [];
   updateLetterToGuess();
   updateGuessesLeft();
   updateGuessesSoFar();
@@ -69,8 +69,8 @@ document.onkeydown = function(event) {
   // Lowercase the letter
   var letter = event.key.toLowerCase();
 
-  // Then add the guess to the guessedLetters
-  guessedLetters.push(letter);
+  // Then add the guess to the userAnswers
+  userAnswers.push(letter);
 
   // Then its going to run the update functions
   updateGuessesLeft();
@@ -81,7 +81,7 @@ document.onkeydown = function(event) {
     alert("You have some psychic abilities, tell me the what's in the future.");
     // If there is then we win and we'll update the HTML to display the win.
     wins++;
-    document.querySelector("#wins").innerHTML = wins;
+    $("#wins").html(wins);
 
     // Then reset the game
     reset();
@@ -92,7 +92,7 @@ document.onkeydown = function(event) {
     // Then we will loss and we'll update the HTML to display the loss.
     losses++;
     alert("Aw, you're not psychic right now. Want to try again?");
-    document.querySelector("#losses").innerHTML = losses;
+    $("#losses").html(losses);
 
     // Then reset the game.
     reset();
